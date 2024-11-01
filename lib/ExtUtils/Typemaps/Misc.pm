@@ -3,13 +3,31 @@ package ExtUtils::Typemaps::Misc;
 use strict;
 use warnings;
 
+use parent 'ExtUtils::Typemaps';
+
+use ExtUtils::Typemaps::IntObj;
+use ExtUtils::Typemaps::OpaqueObj;
+use ExtUtils::Typemaps::Slurp;
+
+sub new {
+	my $class = shift;
+
+	my $self = $class->SUPER::new(@_);
+
+	$self->merge(typemap => ExtUtils::Typemaps::IntObj->new);
+	$self->merge(typemap => ExtUtils::Typemaps::OpaqueObj->new);
+	$self->merge(typemap => ExtUtils::Typemaps::Slurp->new);
+
+	return $self;
+}
+
 1;
 
 # ABSTRACT: A collection of miscelaneous typemap templates
 
 =head1 DESCRIPTION
 
-This distribution is a collection of the following typemap bundles:
+This package is an aggregate typemap bundle of all of the bundles in this distribution:
 
 =head2 OpaqueObj
 
