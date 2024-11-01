@@ -71,15 +71,15 @@ C<T_INTOBJ> is a typemap for an XS object those state is a single immutable inte
 C<T_INTREF> is much the same as C<T_INTOBJ> but doesn't bless the reference.
 
 =head1 INCLUSION
- 
+
 To use this typemap template you need to include it into your local typemap. The easiest way to do that is to use the L<typemap> script in L<App::typemap>. E.g.
- 
+
  typemap --merge ExtUtils::Typemaps::IntObj
- 
+
 If you author using C<Dist::Zilla> you can use L<Dist::Zilla::Plugin::Typemap> instead.
- 
+
 Alternatively, you can include it at runtime by adding the following to your XS file:
- 
+
  INCLUDE_COMMAND: $^X -MExtUtils::Typemaps::Cmd -e "print embeddable_typemap('IntObj')"
- 
+
 That does require adding a build time dependency on this module.
