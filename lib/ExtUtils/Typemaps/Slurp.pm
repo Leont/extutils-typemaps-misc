@@ -19,7 +19,7 @@ sub new {
 
 1;
 
-# ABSTRACT: Typemap for storing objects as a string reference
+# ABSTRACT: Typemap for slurping arguments
 
 =head1 SYNOPSIS
 

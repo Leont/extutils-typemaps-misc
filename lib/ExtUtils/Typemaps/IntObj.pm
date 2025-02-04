@@ -44,7 +44,7 @@ END
 
 1;
 
-# ABSTRACT: Typemap for storing objects as a string reference
+# ABSTRACT: Typemap for storing int-like handles as objects
 
 =head1 SYNOPSIS
 

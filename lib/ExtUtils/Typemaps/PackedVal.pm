@@ -18,7 +18,7 @@ sub new {
 
 1;
 
-# ABSTRACT: Typemap for storing objects as a string reference
+# ABSTRACT: Typemap for storing objects using external helper functions
 
 =head1 SYNOPSIS
 
