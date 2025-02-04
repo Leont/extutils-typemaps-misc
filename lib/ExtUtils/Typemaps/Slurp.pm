@@ -30,7 +30,7 @@ In typemap
 
 In your XS:
 
- static void my_init_t_gather(my_init_t* init, size_t count, SV** args) {
+ static void my_init_t_gather(my_init_t* init, SV** args, size_t count) {
      ...;
  }
 
