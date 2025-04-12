@@ -20,12 +20,33 @@ sub new {
     }
 END
 
+	$self->add_inputmap(xstype => 'T_OPAQUEOBJ_MAYBE', code => <<'END');
+	{
+		SV * sv = $arg;
+		if (SvOK(sv)) {
+			if (SvROK(sv) && sv_derived_from(sv, \"$ntype\"))
+				$var = ($type)SvPV_nolen(SvRV(sv));
+			else
+				croak(\"%s: %s is not of type %s\", ${$ALIAS?\q[GvNAME(CvGV(cv))]:\qq[\"$pname\"]}, \"$var\", \"$ntype\");
+		} else
+			$var = NULL;
+	}
+END
+
 	$self->add_outputmap(xstype => 'T_OPAQUEOBJ', code => <<'END');
 	{
 		sv_setref_pvn($arg, \"$ntype\", (const char*)$var, sizeof(*$var));
 		SvREADONLY_on(SvRV($arg));
 	}
 END
+
+	$self->add_outputmap(xstype => 'T_OPAQUEOBJ_MAYBE', code => <<'END');
+	if (SvOK($var)) {
+		sv_setref_pvn($arg, \"$ntype\", (const char*)$var, sizeof(*$var));
+		SvREADONLY_on(SvRV($arg));
+	}
+END
+
 
 	return $self;
 }
