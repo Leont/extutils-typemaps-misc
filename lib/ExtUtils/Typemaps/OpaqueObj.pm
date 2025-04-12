@@ -35,14 +35,14 @@ END
 
 	$self->add_outputmap(xstype => 'T_OPAQUEOBJ', code => <<'END');
 	{
-		sv_setref_pvn($arg, \"$ntype\", (const char*)$var, sizeof(*$var));
+		sv_usepvn(newSVrv($arg, \"$ntype\"), (char*)$var, sizeof(*$var));
 		SvREADONLY_on(SvRV($arg));
 	}
 END
 
 	$self->add_outputmap(xstype => 'T_OPAQUEOBJ_MAYBE', code => <<'END');
 	if (SvOK($var)) {
-		sv_setref_pvn($arg, \"$ntype\", (const char*)$var, sizeof(*$var));
+		sv_usepvn(newSVrv($arg, \"$ntype\"), (char*)$var, sizeof(*$var));
 		SvREADONLY_on(SvRV($arg));
 	}
 END
