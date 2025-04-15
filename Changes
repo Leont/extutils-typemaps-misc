@@ -3,6 +3,7 @@ Revision history for ExtUtils-Typemaps-Misc
 {{$NEXT}}
           - Adopt buffer instead of copying in T_OPAQUEOBJ
           - Add T_OPAQUEOBJ_MAYBE
+          - Check buffer size instead of inheritance in T_OPAQUEOBJ
 
 0.003     2025-02-04 01:05:10+01:00 Europe/Brussels
           - Fix abstracts of various typemaps

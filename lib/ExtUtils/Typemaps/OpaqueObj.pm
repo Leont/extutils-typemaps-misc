@@ -13,7 +13,7 @@ sub new {
 	$self->add_inputmap(xstype => 'T_OPAQUEOBJ', code => <<'END');
     {
 		SV * sv = $arg;
-		if (SvROK(sv) && sv_derived_from(sv, \"$ntype\"))
+		if (SvROK(sv) && SvPOK(SvRV(sv)) && SvCUR(SvRV(sv)) == sizeof(*$var))
 			$var = ($type)SvPV_nolen(SvRV(sv));
 		else
 			croak(\"%s: %s is not of type %s\", ${$ALIAS?\q[GvNAME(CvGV(cv))]:\qq[\"$pname\"]}, \"$var\", \"$ntype\");
@@ -24,7 +24,7 @@ END
 	{
 		SV * sv = $arg;
 		if (SvOK(sv)) {
-			if (SvROK(sv) && sv_derived_from(sv, \"$ntype\"))
+			if (SvROK(sv) && SvPOK(SvRV(sv)) && SvCUR(SvRV(sv)) == sizeof(*$var))
 				$var = ($type)SvPV_nolen(SvRV(sv));
 			else
 				croak(\"%s: %s is not of type %s\", ${$ALIAS?\q[GvNAME(CvGV(cv))]:\qq[\"$pname\"]}, \"$var\", \"$ntype\");
